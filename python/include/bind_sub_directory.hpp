@@ -1,0 +1,8 @@
+#ifndef SYMGEN_PYTHON_BINDINGS_BIND_SUBD_IRECTORY_HPP
+#define SYMGEN_PYTHON_BINDINGS_BIND_SUBD_IRECTORY_HPP
+
+#include <pybind11/pybind11.h>
+
+void bind_sub_directory(pybind11::module_& m);
+
+#endif // SYMGEN_PYTHON_BINDINGS_BIND_SUBD_IRECTORY_HPP

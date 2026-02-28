@@ -1,0 +1,8 @@
+#ifndef SYMGEN_PYTHON_BINDINGS_BIND_PYBIND11_MODULE_HPP
+#define SYMGEN_PYTHON_BINDINGS_BIND_PYBIND11_MODULE_HPP
+
+#include <pybind11/pybind11.h>
+
+void bind_pybind11_module(pybind11::module_& m);
+
+#endif // SYMGEN_PYTHON_BINDINGS_BIND_PYBIND11_MODULE_HPP

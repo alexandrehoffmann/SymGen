@@ -1,0 +1,8 @@
+#ifndef SYMGEN_PYTHON_BINDINGS_BIND_COMPILE_OPTIONS_HPP
+#define SYMGEN_PYTHON_BINDINGS_BIND_COMPILE_OPTIONS_HPP
+
+#include <pybind11/pybind11.h>
+
+void bind_compile_options(pybind11::module_& m);
+
+#endif // SYMGEN_PYTHON_BINDINGS_BIND_COMPILE_OPTIONS_HPP

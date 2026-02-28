@@ -1,0 +1,8 @@
+#ifndef SYMGEN_PYTHON_BINDINGS_BIND_EXECUTABLE_HPP
+#define SYMGEN_PYTHON_BINDINGS_BIND_EXECUTABLE_HPP
+
+#include <pybind11/pybind11.h>
+
+void bind_executable(pybind11::module_& m);
+
+#endif // SYMGEN_PYTHON_BINDINGS_BIND_EXECUTABLE_HPP

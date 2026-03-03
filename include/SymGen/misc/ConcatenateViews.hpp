@@ -58,8 +58,6 @@ public:
         Iterator operator++(int) { Iterator tmp = *this; ++(*this); return tmp; }
         
         friend bool operator==(const Iterator& it, const Sentinel /* sentinel */) { return std::holds_alternative<std::default_sentinel_t>(it.m_current); }
-        
-        friend bool operator!=(const Iterator& it, const Sentinel sentinel) { return not(it == sentinel); }
     private:
         reference getCurrentElement() const;
         
@@ -101,6 +99,9 @@ std::ranges::view auto concatenate(Ranges&&... ranges) { return ConcatenateViews
 
 } // misc
 } // namespace SymGen
+
+template<class... Views>
+inline constexpr bool std::ranges::enable_borrowed_range<SymGen::misc::ConcatenateViews<Views...>> = (std::ranges::enable_borrowed_range<Views> and ...);
 
 #include <SymGen/misc/ConcatenateViews_impl.hpp>
 

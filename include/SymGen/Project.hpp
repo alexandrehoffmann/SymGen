@@ -99,6 +99,8 @@ private:
 	
 	bool satisfyDependency(const Dependency& dependency) const;
 	
+	void printEnableTesting(std::FILE* file);
+	
 	std::string                                            m_version;
 	std::string                                            m_description;
 	std::vector<Language>                                  m_langages;

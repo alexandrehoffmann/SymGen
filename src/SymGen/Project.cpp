@@ -138,6 +138,7 @@ void Project::toCMakeListsImpl(std::FILE* file)
 	fmt::println(file, "");
 	fmt::println(file, "if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)");
 	fmt::println(file, "\tset(CMAKE_BUILD_TYPE Release CACHE STRING \"Choose the type of build.\")");
+	fmt::println(file, "\tset_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS \"Debug\" \"Release\" \"RelWithDebInfo\" \"MinSizeRel\")");
 	fmt::println(file, "endif()");
 	fmt::println(file, "");
 	fmt::println(file, "set({}_SAN_FLAGS -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer)", getCmakePrefix());
@@ -160,11 +161,25 @@ void Project::toCMakeListsImpl(std::FILE* file)
 	// print options
 	utils::printSection(file, "Options");
 	fmt::println(file, "");
+	
+	const std::size_t nameAlignLen = std::ranges::max(getAllOptions() | std::views::transform([](const Option& option) 
+	{ 
+		return option.getName().size(); 
+	}));
+	
+	const std::size_t descAlignLen = std::ranges::max(getAllOptions() | std::views::transform([](const Option& option) 
+	{
+		return option.getDescription().size();
+	}));
+	
 	for (const Option& option : getAllOptions())
 	{
-		fmt::println(file, "{}", option);
+		//~ fmt::println(file, "option({:<{}} \"{:<{}}\" {})", option.getName(), nameAlignLen, option.getDescription(), descAlignLen, option.getDefaultValue() == SymGen::ON ? "ON" : "OFF");
+		fmt::println(file, "option({:<{}} {:<{}} {})", option.getName(), nameAlignLen, fmt::format("\"{}\"", option.getDescription()), descAlignLen + 2, option.getDefaultValue() == SymGen::ON ? "ON" : "OFF");
 	}
 	fmt::println(file, "");
+	// Tests
+	printEnableTesting(file);
 	// print dependencies
 	utils::printSection(file, "Dependencies");
 	fmt::println(file, "");
@@ -226,7 +241,10 @@ void Project::toCMakeListsImpl(std::FILE* file)
 	fmt::println(file, "if({}_USE_NATIVE_OPT)", getCmakePrefix());
 	fmt::println(file, "\ttarget_compile_options({} INTERFACE -march=native -mtune=native)", getHelperLibrary(m_optionHelperLibId));
 	fmt::println(file, "endif()");
-	fmt::println(file, "");
+}
+
+void Project::printEnableTesting(std::FILE* file)
+{
 	if (hasTests())
 	{
 		utils::printSection(file, "Tests");
@@ -253,6 +271,7 @@ void Project::toCMakeListsImpl(std::FILE* file)
 			utils::printSection(file, "Tests");
 			fmt::println(file, "");
 			fmt::println(file, "enable_testing()");
+			fmt::println(file, "");
 		}
 		else if (itDirOpt != std::ranges::cend(m_optionalSubdirectory))
 		{
@@ -261,6 +280,7 @@ void Project::toCMakeListsImpl(std::FILE* file)
 			fmt::println(file, "if(${{{}}})", itDirOpt->second.getName());
 			fmt::println(file, "\tenable_testing()");
 			fmt::println(file, "endif()");
+			fmt::println(file, "");
 		}
 		
 	}
@@ -294,8 +314,9 @@ void Project::fillDefaultOptions()
 {
 	const auto allOptionsView = misc::concatenate(m_options, std::views::elements<1>(m_optionalSubdirectory));
 	
-	const std::string enableSanOption = utils::concat(getCmakePrefix(), "_ENABLE_SANITIZERS");
-	const std::string buildDocOption  = utils::concat(getCmakePrefix(), "_BUILD_DOC");
+	const std::string enableSanOption      = utils::concat(getCmakePrefix(), "_ENABLE_SANITIZERS");
+	const std::string buildDocOption       = utils::concat(getCmakePrefix(), "_BUILD_DOC");
+	const std::string useNativeOptsOption  = utils::concat(getCmakePrefix(), "_USE_NATIVE_OPT");
 	
 	const auto it_san = std::ranges::find_if(allOptionsView, [&enableSanOption](const Option& option) -> bool
 	{
@@ -307,13 +328,22 @@ void Project::fillDefaultOptions()
 		return option.getName() == buildDocOption;
 	});
 	
+	const auto it_nativeOpts = std::ranges::find_if(allOptionsView, [&useNativeOptsOption](const Option& option) -> bool
+	{
+		return option.getName() == useNativeOptsOption;
+	});
+	
 	if (it_san == std::cend(allOptionsView))
 	{
-		m_options.emplace_back(utils::concat(getCmakePrefix(), "_ENABLE_SANITIZERS"), "Enable sanitizers in Debug builds", OFF);
+		m_options.emplace_back(enableSanOption, "Enable sanitizers in Debug builds", OFF);
 	}
 	if (it_doc == std::cend(allOptionsView))
 	{
-		m_options.emplace_back(utils::concat(getCmakePrefix(), "_BUILD_DOC"), "Build Doxygen documentation", OFF);
+		m_options.emplace_back(buildDocOption, "Build Doxygen documentation", OFF);
+	}
+	if (it_nativeOpts == std::cend(allOptionsView))
+	{
+		m_options.emplace_back(useNativeOptsOption, "Enable -march=native -mtune=native", OFF);
 	}
 }
 

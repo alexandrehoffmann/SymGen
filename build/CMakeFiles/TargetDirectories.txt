@@ -1,6 +1,0 @@
-/home/alex/Desktop/SymGen/build/CMakeFiles/SymGen.dir
-/home/alex/Desktop/SymGen/build/CMakeFiles/edit_cache.dir
-/home/alex/Desktop/SymGen/build/CMakeFiles/rebuild_cache.dir
-/home/alex/Desktop/SymGen/build/python/CMakeFiles/symgen.dir
-/home/alex/Desktop/SymGen/build/python/CMakeFiles/edit_cache.dir
-/home/alex/Desktop/SymGen/build/python/CMakeFiles/rebuild_cache.dir

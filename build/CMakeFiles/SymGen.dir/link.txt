@@ -1,2 +1,0 @@
-/home/alex/miniforge3/bin/x86_64-conda-linux-gnu-ar qc libSymGen.a CMakeFiles/SymGen.dir/src/SymGen/Project.cpp.o CMakeFiles/SymGen.dir/src/SymGen/Package.cpp.o CMakeFiles/SymGen.dir/src/SymGen/SubDirectory.cpp.o CMakeFiles/SymGen.dir/src/SymGen/utils.cpp.o
-/home/alex/miniforge3/bin/x86_64-conda-linux-gnu-ranlib libSymGen.a

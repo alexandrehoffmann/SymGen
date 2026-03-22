@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/alex/Desktop/SymGen/build/cmake_install.cmake",
-		"/home/alex/Desktop/SymGen/build/python/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

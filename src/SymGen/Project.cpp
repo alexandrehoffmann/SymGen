@@ -1,10 +1,12 @@
 #include <SymGen/Project.hpp>
 #include <SymGen/CMakeCompileOption.hpp>
 #include <SymGen/MissingPackageExeception.hpp>
+#include <SymGen/misc/AddPrefix.hpp>
 
 #include <algorithm>
 #include <filesystem>
 
+#include <fmt/format.h>
 #include <fmt/ranges.h>
 
 namespace SymGen
@@ -113,7 +115,7 @@ void Project::toCMakeListsImpl(std::FILE* file)
 	fillDefaultOptions();
 	
 	const auto isNotCommonCompileOption = [&commonCompileOptions = m_commonCompileOptions] (const std::string_view option) -> bool
-	{
+	{		
 		return std::ranges::find(commonCompileOptions, option) == std::cend(commonCompileOptions);
 	};
 	
@@ -152,9 +154,16 @@ void Project::toCMakeListsImpl(std::FILE* file)
 	{
 		for (const auto& [langAndCompiler, options] : m_compilerOptions)
 		{
+			constexpr char prefix[] = "\n\t";
+			
 			const auto& [language, compiler] = langAndCompiler;
-			fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}})", getCmakePrefix(), compiler, language, getCmakePrefix(), 
-				fmt::join(options | std::views::filter(isNotCommonCompileOption), "\n\t"));
+			
+			auto nonCommonCompileOptions = options | std::views::filter(isNotCommonCompileOption) | std::views::transform([prefix](const std::string& option) 
+			{
+				return misc::AddPrefix(prefix, option);
+			});
+			
+			fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS ${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
 			fmt::println(file, "");
 		}
 	}
@@ -225,6 +234,7 @@ void Project::toCMakeListsImpl(std::FILE* file)
 		fmt::println(file, "target_compile_features({} INTERFACE {})", getHelperLibrary(m_optionHelperLibId), str);
 	}
 	fmt::println(file, "");
+	printTargetCompileDefinitions(file);
 	if (not m_compilerOptions.empty())
 	{
 		const auto cmakeCompileOptions = m_compilerOptions | std::views::keys | std::views::transform([cmakePrefix = getCmakePrefix()](const LanguageCompiler& languageCompiler) -> CMakeCompileOption
@@ -299,7 +309,7 @@ void Project::mergeCommonCompileOptions()
 				return std::ranges::find(otherOptions, option) != std::cend(otherOptions);
 			});
 			
-			if (isCommon) { m_commonCompileOptions.emplace_back(option); }
+			if (isCommon) { m_commonCompileOptions.insert(option); }
 		}
 	}
 }

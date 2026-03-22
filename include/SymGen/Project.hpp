@@ -8,7 +8,9 @@
 #include <SymGen/Directory.hpp>
 #include <SymGen/misc/ConcatenateViews.hpp>
 
+#include <vector>
 #include <map>
+#include <set>
 
 namespace SymGen
 {
@@ -106,7 +108,7 @@ private:
 	std::vector<Language>                                  m_langages;
 	std::map<Language, unsigned int>                       m_standards;
 	std::map< LanguageCompiler, std::vector<std::string> > m_compilerOptions;
-	std::vector<std::string>                               m_commonCompileOptions;
+	std::set<std::string>                                  m_commonCompileOptions;
 	std::vector<Option>                                    m_options;
 	std::vector<SubDirectory>                              m_subDirectories;
 	std::vector< std::pair<SubDirectory, Option> >         m_optionalSubdirectory;

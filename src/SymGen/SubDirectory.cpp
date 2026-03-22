@@ -26,12 +26,15 @@ void SubDirectory::toCMakeListsImpl(std::FILE* file)
 	utils::printSection(file, "Sources");
 	fmt::println(file, "");
 	printSources(file);
+	// Compile Definitions
+	utils::printSection(file, "Compile Definitions");
+	fmt::println(file, "");
+	printTargetCompileDefinitions(file);
 	// Link
 	utils::printSection(file, "Link");
 	fmt::println(file, "");
 	printTargetLink(file);
 	// Tests
-	
 	if (hasTests())
 	{
 		utils::printSection(file, "Tests");

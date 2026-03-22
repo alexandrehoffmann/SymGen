@@ -18,7 +18,7 @@ struct fmt::formatter<SymGen::Compiler> : fmt::formatter<std::string_view>
 		switch (language)
 		{
 			case SymGen::Compiler::GNU:   return fmt::formatter<std::string_view>::format("GNU",   ctx);
-			case SymGen::Compiler::CLANG: return fmt::formatter<std::string_view>::format("CLANG", ctx);
+			case SymGen::Compiler::CLANG: return fmt::formatter<std::string_view>::format("Clang", ctx);
 			case SymGen::Compiler::MSV:   return fmt::formatter<std::string_view>::format("MSV",   ctx);
 		}
 		// fallback (should never happen)

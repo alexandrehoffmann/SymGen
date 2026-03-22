@@ -34,6 +34,8 @@ inline void printTargetLinkLibraries(std::FILE* file, const Executable& executab
 
 inline void printTargetLinkLibraries(std::FILE* file, const Pybind11Module& pybind11Module, const std::span<const std::string> helperLibraries)  { detail::printTargetLinkLibraries(file, pybind11Module.getName(), pybind11Module.getDependencies(), helperLibraries); }
 
+void printTargetCompileDefinitions(std::FILE* file, const std::string_view targetName, const std::span<const std::string> publicCompileOptions, const std::span<const std::string> privateCompileOptions);
+
 template<std::integral T, T... CASES, class UnaryFunc>
 inline UnaryFunc&& staticSwitch(std::integer_sequence<T, CASES...> /* cases */, const T targetCase, UnaryFunc&& func) { ((targetCase == CASES and (func(std::integral_constant<T,CASES>{}), true)) or ...); return std::forward<UnaryFunc>(func); }
 

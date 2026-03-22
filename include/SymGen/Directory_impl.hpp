@@ -145,6 +145,24 @@ void Directory<Derived>::printTargetLink(std::FILE* file)
 }
 
 template<class Derived>
+void Directory<Derived>::printTargetCompileDefinitions(std::FILE* file)
+{
+
+	for (const Library& library : m_libraries)
+	{
+		utils::printTargetCompileDefinitions(file, library.getName(), library.getPublicCompileDefinitions(), library.getPrivateCompileDefinitions());
+	}
+	for (const Pybind11Module& pyBind11Module : m_pybind11Modules )
+	{
+		utils::printTargetCompileDefinitions(file, pyBind11Module.getName(), pyBind11Module.getPublicCompileDefinitions(), pyBind11Module.getPrivateCompileDefinitions());
+	}
+	for (const Executable& executable : m_executables)
+	{
+		utils::printTargetCompileDefinitions(file, executable.getName(), executable.getPublicCompileDefinitions(), executable.getPrivateCompileDefinitions());
+	}
+}
+
+template<class Derived>
 void Directory<Derived>::printTests(std::FILE* file)
 {	
 	using Iterator = typename std::vector<Executable>::const_iterator;

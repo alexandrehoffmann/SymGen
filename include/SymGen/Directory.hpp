@@ -70,6 +70,8 @@ protected:
 	
 	void printTargetLink(std::FILE* file);
 	
+	void printTargetCompileDefinitions(std::FILE* file);
+	
 	void printTests(std::FILE* file);
 	
 	inline std::string_view getHelperLibrary(const std::size_t id) const { return m_helperLibraries[id]; }

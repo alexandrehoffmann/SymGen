@@ -57,7 +57,14 @@ void printSection(std::FILE* file, const std::string_view secName)
 
 void printTargetSources(std::FILE* file, const std::string_view targetName, const std::span<const std::string> sources)
 {
-	fmt::println(file, "target_sources({} PRIVATE\n\t{})", targetName, fmt::join(sources, "\n\t"));
+	if (std::ranges::size(sources) > 1)
+	{
+		fmt::println(file, "target_sources({} PRIVATE\n\t{})", targetName, fmt::join(sources, "\n\t"));	
+	}
+	else
+	{
+		fmt::println(file, "target_sources({} PRIVATE {})", targetName, sources.front());	
+	}
 	fmt::println(file, "");
 }
 
@@ -84,6 +91,28 @@ void printTargetLinkLibraries(std::FILE* file, const Library& library, const std
 		});
 		
 		fmt::println(file, "target_link_libraries({}{}{}{})", library.getName(), fmt::join(helperLibrariesView, ""), fmt::join(publicDependenciesView, ""), fmt::join(privateDependenciesView, ""));
+		fmt::println(file, "");
+	}
+}
+
+void printTargetCompileDefinitions(std::FILE* file, const std::string_view targetName, const std::span<const std::string> publicCompileOptions, const std::span<const std::string> privateCompileOptions)
+{
+	if (not (publicCompileOptions.empty() and privateCompileOptions.empty()))
+	{
+		constexpr char publicPrefix[]  = "\n\tPUBLIC ";
+		constexpr char privatePrefix[] = "\n\tPRIVATE ";
+		
+		const auto publicCompileOptionsView = publicCompileOptions | std::views::transform([publicPrefix](const std::string& compileOption) 
+		{
+			return misc::AddPrefix(publicPrefix, compileOption);
+		});
+		
+		const auto privateCompileOptionsView = privateCompileOptions | std::views::transform([privatePrefix](const std::string& compileOption) 
+		{
+			return misc::AddPrefix(privatePrefix, compileOption);
+		});
+		
+		fmt::println(file, "target_compile_options({}{}{})", targetName, fmt::join(publicCompileOptionsView, ""), fmt::join(privateCompileOptionsView, ""));
 		fmt::println(file, "");
 	}
 }

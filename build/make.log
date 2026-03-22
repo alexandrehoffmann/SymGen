@@ -1,0 +1,176 @@
+[  5%] Building CXX object CMakeFiles/SymGen.dir/src/SymGen/Project.cpp.o
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp: In member function 'void SymGen::Project::toCMakeListsImpl(FILE*)':
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:178: error: no matching function for call to 'join(const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&, const char [1])'
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/alex/Desktop/SymGen/include/SymGen/Directory_impl.hpp:11,
+                 from /home/alex/Desktop/SymGen/include/SymGen/Directory.hpp:111,
+                 from /home/alex/Desktop/SymGen/include/SymGen/SubDirectory.hpp:4,
+                 from /home/alex/Desktop/SymGen/include/SymGen/Project.hpp:7,
+                 from /home/alex/Desktop/SymGen/src/SymGen/Project.cpp:1:
+/home/alex/miniforge3/include/fmt/ranges.h:792:6: note: candidate: 'template<class It, class Sentinel> fmt::v11::join_view<It, Sentinel> fmt::v11::join(It, Sentinel, string_view)'
+  792 | auto join(It begin, Sentinel end, string_view sep) -> join_view<It, Sentinel> {
+      |      ^~~~
+/home/alex/miniforge3/include/fmt/ranges.h:792:6: note:   candidate expects 3 arguments, 2 provided
+/home/alex/miniforge3/include/fmt/ranges.h:811:6: note: candidate: 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view)'
+  811 | auto join(Range&& r, string_view sep)
+      |      ^~~~
+/home/alex/miniforge3/include/fmt/ranges.h:811:6: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]':
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:812:46: error: no matching function for call to 'range_begin(const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&)'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/miniforge3/include/fmt/ranges.h:49:6: note: candidate: 'template<class T, long unsigned int N> const T* fmt::v11::detail::range_begin(const T (&)[N])'
+   49 | auto range_begin(const T (&arr)[N]) -> const T* {
+      |      ^~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:49:6: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h:812:46: note:   mismatched types 'const T [N]' and 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/miniforge3/include/fmt/ranges.h:67:6: note: candidate: 'template<class T> decltype (static_cast<T&&>(rng).begin()) fmt::v11::detail::range_begin(T&&)'
+   67 | auto range_begin(T&& rng) -> decltype(static_cast<T&&>(rng).begin()) {
+      |      ^~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:67:6: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class T> decltype (static_cast<T&&>(rng).begin()) fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]':
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:67:66: error: passing 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' as 'this' argument discards qualifiers [-fpermissive]
+   67 | auto range_begin(T&& rng) -> decltype(static_cast<T&&>(rng).begin()) {
+      |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from /home/alex/Desktop/SymGen/include/SymGen/Directory_impl.hpp:9:
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/ranges:2178:7: note:   in call to 'constexpr std::ranges::transform_view<_Vp, _Fp>::_Iterator<false> std::ranges::transform_view<_Vp, _Fp>::begin() [with _Vp = std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >; _Fp = SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)>]'
+ 2178 |       begin()
+      |       ^~~~~
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]':
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:78:6: note: candidate: 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&)'
+   78 | auto range_begin(T&& rng)
+      |      ^~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:78:6: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]':
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:80:34: error: no matching function for call to 'begin(const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&)'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:36,
+                 from /home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/string:53,
+                 from /home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/stdexcept:39,
+                 from /home/alex/miniforge3/include/fmt/format.h:54,
+                 from /home/alex/Desktop/SymGen/include/SymGen/Language.hpp:4,
+                 from /home/alex/Desktop/SymGen/include/SymGen/Project.hpp:4:
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/initializer_list:88:5: note: candidate: 'template<class _Tp> constexpr const _Tp* std::begin(initializer_list<_Tp>)'
+   88 |     begin(initializer_list<_Tp> __ils) noexcept
+      |     ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/initializer_list:88:5: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h:80:34: note:   'std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' is not derived from 'std::initializer_list<_Tp>'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:52:5: note: candidate: 'template<class _Container> constexpr decltype (__cont.begin()) std::begin(_Container&)'
+   52 |     begin(_Container& __cont) -> decltype(__cont.begin())
+      |     ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:52:5: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h: In substitution of 'template<class _Container> constexpr decltype (__cont.begin()) std::begin(_Container&) [with _Container = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >]':
+/home/alex/miniforge3/include/fmt/ranges.h:80:34:   required by substitution of 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:52:55: error: passing 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' as 'this' argument discards qualifiers [-fpermissive]
+   52 |     begin(_Container& __cont) -> decltype(__cont.begin())
+      |                                           ~~~~~~~~~~~~^~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/ranges:2178:7: note:   in call to 'constexpr std::ranges::transform_view<_Vp, _Fp>::_Iterator<false> std::ranges::transform_view<_Vp, _Fp>::begin() [with _Vp = std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >; _Fp = SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)>]'
+ 2178 |       begin()
+      |       ^~~~~
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]':
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:63:5: note: candidate: 'template<class _Container> constexpr decltype (__cont.begin()) std::begin(const _Container&)'
+   63 |     begin(const _Container& __cont) -> decltype(__cont.begin())
+      |     ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:63:5: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h: In substitution of 'template<class _Container> constexpr decltype (__cont.begin()) std::begin(const _Container&) [with _Container = std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >]':
+/home/alex/miniforge3/include/fmt/ranges.h:80:34:   required by substitution of 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:63:61: error: passing 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' as 'this' argument discards qualifiers [-fpermissive]
+   63 |     begin(const _Container& __cont) -> decltype(__cont.begin())
+      |                                                 ~~~~~~~~~~~~^~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/ranges:2178:7: note:   in call to 'constexpr std::ranges::transform_view<_Vp, _Fp>::_Iterator<false> std::ranges::transform_view<_Vp, _Fp>::begin() [with _Vp = std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >; _Fp = SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)>]'
+ 2178 |       begin()
+      |       ^~~~~
+/home/alex/miniforge3/include/fmt/ranges.h: In substitution of 'template<class T> fmt::v11::enable_if_t<((bool)(! fmt::v11::detail::has_member_fn_begin_end_t<T&&>::value)), decltype (begin(static_cast<T&&>(rng)))> fmt::v11::detail::range_begin(T&&) [with T = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&]':
+/home/alex/miniforge3/include/fmt/ranges.h:812:46:   required by substitution of 'template<class Range, typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> > fmt::v11::join_view<decltype (fmt::v11::detail::range_begin(r)), decltype (fmt::v11::detail::range_end(r))> fmt::v11::join(Range&&, string_view) [with Range = const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >&; typename std::enable_if<(! fmt::v11::is_tuple_like<T>::value), int>::type <anonymous> = 0]'
+  812 |     -> join_view<decltype(detail::range_begin(r)),
+      |                           ~~~~~~~~~~~~~~~~~~~^~~
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:157:   required from here
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:95:5: note: candidate: 'template<class _Tp, long unsigned int _Nm> constexpr _Tp* std::begin(_Tp (&)[_Nm])'
+   95 |     begin(_Tp (&__arr)[_Nm]) noexcept
+      |     ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:95:5: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h:80:34: note:   mismatched types '_Tp [_Nm]' and 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:113:31: note: candidate: 'template<class _Tp> _Tp* std::begin(valarray<_Tp>&)'
+  113 |   template<typename _Tp> _Tp* begin(valarray<_Tp>&) noexcept;
+      |                               ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:113:31: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h:80:34: note:   types 'std::valarray<_Tp>' and 'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' have incompatible cv-qualifiers
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:114:37: note: candidate: 'template<class _Tp> const _Tp* std::begin(const valarray<_Tp>&)'
+  114 |   template<typename _Tp> const _Tp* begin(const valarray<_Tp>&) noexcept;
+      |                                     ^~~~~
+/home/alex/miniforge3/lib/gcc/x86_64-conda-linux-gnu/14.3.0/include/c++/bits/range_access.h:114:37: note:   template argument deduction/substitution failed:
+/home/alex/miniforge3/include/fmt/ranges.h:80:34: note:   'const std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' is not derived from 'const std::valarray<_Tp>'
+   80 |                    decltype(begin(static_cast<T&&>(rng)))> {
+      |                             ~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:827:20: note: candidate: 'template<class Tuple, typename std::enable_if<fmt::v11::is_tuple_like<T>::value, int>::type <anonymous> > constexpr fmt::v11::tuple_join_view<char, Tuple> fmt::v11::join(const Tuple&, string_view)'
+  827 | FMT_CONSTEXPR auto join(const Tuple& tuple, string_view sep)
+      |                    ^~~~
+/home/alex/miniforge3/include/fmt/ranges.h:827:20: note:   template argument deduction/substitution failed:
+In file included from /home/alex/miniforge3/include/fmt/format.h:41:
+/home/alex/miniforge3/include/fmt/ranges.h:826:27: error: no type named 'type' in 'struct std::enable_if<false, int>'
+  826 | template <typename Tuple, FMT_ENABLE_IF(is_tuple_like<Tuple>::value)>
+      |                           ^~~~~~~~~~~~~
+/home/alex/miniforge3/include/fmt/ranges.h:842:6: note: candidate: 'template<class T> fmt::v11::join_view<const T*, const T*> fmt::v11::join(std::initializer_list<_Tp>, string_view)'
+  842 | auto join(std::initializer_list<T> list, string_view sep)
+      |      ^~~~
+/home/alex/miniforge3/include/fmt/ranges.h:842:6: note:   template argument deduction/substitution failed:
+/home/alex/Desktop/SymGen/src/SymGen/Project.cpp:165:178: note:   'std::ranges::transform_view<std::ranges::filter_view<std::ranges::ref_view<const std::vector<std::__cxx11::basic_string<char> > >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(std::string_view)> >, SymGen::Project::toCMakeListsImpl(FILE*)::<lambda(const std::string&)> >' is not derived from 'std::initializer_list<_Tp>'
+  165 |                         fmt::println(file, "set({}_{}_{}_COMPILE_OPTIONS\n\t${{{}_COMMON_COMPILE_OPTIONS}}{})", getCmakePrefix(), compiler, language, getCmakePrefix(), fmt::join(nonCommonCompileOptions, ""));
+      |                                                                                                                                                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+At global scope:
+cc1plus: note: unrecognized command-line option '-Wno-c99-extensions' may have been intended to silence earlier diagnostics
+make[2]: *** [CMakeFiles/SymGen.dir/build.make:79: CMakeFiles/SymGen.dir/src/SymGen/Project.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:109: CMakeFiles/SymGen.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2

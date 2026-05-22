@@ -21,7 +21,7 @@ namespace detail
 
 void printTargetLinkLibraries(std::FILE* file, const std::string_view name, const std::span<const Dependency> dependencies, const std::span<const std::string> helperLibraries)
 {
-	if (not dependencies.empty())
+	if (not dependencies.empty() or not helperLibraries.empty())
 	{
 		constexpr char prefix[] = "\n\tPRIVATE ";
 			
@@ -70,10 +70,10 @@ void printTargetSources(std::FILE* file, const std::string_view targetName, cons
 
 void printTargetLinkLibraries(std::FILE* file, const Library& library, const std::span<const std::string> helperLibraries)
 {
-	if (not (library.getPublicDependencies().empty() and library.getPrivateDependencies().empty()))
+	if (not (library.getPublicDependencies().empty() and library.getPrivateDependencies().empty() and helperLibraries.empty()))
 	{
-		constexpr char publicPrefix[]  = "\n\tPUBLIC ";
-		constexpr char privatePrefix[] = "\n\tPRIVATE ";
+		const std::string publicPrefix  = library.isInterface() ? "\n\tINTERFACE " : "\n\tPUBLIC ";
+		const std::string privatePrefix = library.isInterface() ? "\n\tINTERFACE " : "\n\tPRIVATE ";
 		
 		const auto publicDependenciesView = library.getPublicDependencies() | std::views::transform([publicPrefix](const Dependency& dependency) 
 		{

@@ -129,7 +129,7 @@ void Directory<Derived>::printSources(std::FILE* file)
 
 template<class Derived>
 void Directory<Derived>::printTargetLink(std::FILE* file)
-{
+{	
 	for (const Library& library : m_libraries)
 	{
 		utils::printTargetLinkLibraries(file, library, m_helperLibraries);
